@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+model User {
+  id           String   @id @default(uuid())
+  nombre       String
+  apellido     String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         Role     @default(CLIENT)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  orders Order[]
+
+  @@map("users")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  nombre    String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  books Book[]
+
+  @@map("categories")
+}
+
+model Book {
+  id          String   @id @default(uuid())
+  nombre      String
+  descripcion String
+  precio      Decimal  @db.Decimal(10, 2)
+  descuento   Int      @default(0)
+  activo      Boolean  @default(true)
+  categoryId  String   @map("category_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  category   Category    @relation(fields: [categoryId], references: [id])
+  orderItems OrderItem[]
+
+  @@map("books")
+}
+
+model Order {
+  id                  String   @id @default(uuid())
+  paypalTransactionId String   @unique @map("paypal_transaction_id")
+  status              String
+  total               Decimal  @db.Decimal(10, 2)
+  payerEmail          String   @map("payer_email")
+  payerId             String   @map("payer_id")
+  fecha               DateTime
+  userId              String   @map("user_id")
+
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id             String  @id @default(uuid())
+  orderId        String  @map("order_id")
+  bookId         String  @map("book_id")
+  nombreSnapshot String  @map("nombre_snapshot")
+  precioSnapshot Decimal @db.Decimal(10, 2) @map("precio_snapshot")
+  cantidad       Int
+
+  order Order @relation(fields: [orderId], references: [id])
+  book  Book  @relation(fields: [bookId], references: [id])
+
+  @@map("order_items")
+}
