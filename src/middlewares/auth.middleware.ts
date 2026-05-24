@@ -29,7 +29,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction): v
 }
 
 export const authorizeAdmin = (req: Request, res: Response, next: NextFunction): void => {
-    if (req.user?.role !== 'admin') {
+    if (req.user?.role !== 'ADMIN') {
         res.status(403).json({ message: 'Acceso denegado: solo administradores' })
         return
     }
