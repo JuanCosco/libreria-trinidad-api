@@ -6,10 +6,12 @@ export const getAll = async () => {
 }
 
 export const getById = async (id: string) => {
+    console.log(`[Books] Buscando libro id: ${id}`)
     const book = await BookRepository.findById(id)
     if (!book) {
         throw new Error('Book not found')
     }
+    console.log(`[Books] Libro encontrado: ${book.nombre}`)
     return book
 }
 

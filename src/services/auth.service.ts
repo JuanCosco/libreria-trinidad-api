@@ -14,6 +14,7 @@ export const register = async (input: RegisterInput) => {
 
     const passwordHash = await bcrypt.hash(input.password, 10);
     const user = await AuthRepository.createUser({ ...input, passwordHash });
+    console.log(`[Auth] Usuario registrado: ${user.email} | role: ${user.role}`)
 
     return {
         id: user.id,
@@ -46,6 +47,7 @@ export const login = async (input: LoginInput) => {
     };
 
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
+    console.log(`[Auth] Login exitoso: ${user.email} | role: ${user.role}`)
 
     return {
         token,
