@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import authRoutes from './routes/auth.routes'
 import bookRoutes from './routes/book.routes'
+import categoryRoutes from './routes/category.routes'
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ app.get('/', (_req, res) => {
 
 app.use('/api/auth', authRoutes)
 app.use('/api/books', bookRoutes)
+app.use('/api/categories', categoryRoutes)
 
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`)
