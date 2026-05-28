@@ -22,6 +22,7 @@ model User {
   updatedAt    DateTime @updatedAt @map("updated_at")
 
   orders Order[]
+  cart   Cart? 
 
   @@map("users")
 }
@@ -49,6 +50,7 @@ model Book {
 
   category   Category    @relation(fields: [categoryId], references: [id])
   orderItems OrderItem[]
+  cartItems  CartItem[]
 
   @@map("books")
 }
@@ -81,4 +83,29 @@ model OrderItem {
   book  Book  @relation(fields: [bookId], references: [id])
 
   @@map("order_items")
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String     @unique @map("user_id")
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  user  User       @relation(fields: [userId], references: [id])
+  items CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id       String  @id @default(uuid())
+  cartId   String  @map("cart_id")
+  bookId   String  @map("book_id")
+  cantidad Int     @default(1)
+
+  cart Cart @relation(fields: [cartId], references: [id])
+  book Book @relation(fields: [bookId], references: [id])
+
+  @@unique([cartId, bookId])
+  @@map("cart_items")
 }
