@@ -1,5 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
+// Importar rutas
 import authRoutes from './routes/auth.routes'
 import bookRoutes from './routes/book.routes'
 import categoryRoutes from './routes/category.routes'
@@ -9,7 +11,12 @@ import orderRoutes from './routes/order.routes'
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT ?? 3000
+const PORT = process.env.PORT ?? 3001
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL ?? 'http://localhost:5173',
+  credentials: true
+}))
 
 app.use(express.json())
 
