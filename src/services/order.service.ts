@@ -56,7 +56,7 @@ export const createFromCart = async (userId: string) => {
     console.log(`[Orders] Orden creada id: ${order.id} | total: S/ ${total.toFixed(2)}`)
 
     // Limpiar el carrito después de crear la orden
-    await CartRepository.clearCart(userId)
+    await CartRepository.clearCart(cart.id)
     console.log(`[Orders] Carrito vaciado tras crear orden`)
 
     return order
