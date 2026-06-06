@@ -39,7 +39,7 @@ describe('POST /api/auth/register', () => {
       .send(testUser)
 
     expect(res.status).toBe(400)
-    expect(res.body.error).toBe('Email ya registrado') 
+    expect(res.body.error).toBe('Email ya registrado')
   })
 
   it('debe rechazar registro sin campos requeridos', async () => {
