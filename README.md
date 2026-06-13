@@ -22,17 +22,17 @@ Este repositorio es parte del proyecto **Librería Trinidad**, una migración co
 - **Tests:** Jest + Supertest
 
 ## Arquitectura
-
+```text
 src/
-├── routes/ # Definición de endpoints
-├── controllers/ # Manejo de request/response
-├── services/ # Lógica de negocio
-├── repositories/ # Acceso a datos (Prisma)
-├── middlewares/ # Auth, roles
-├── types/ # Interfaces TypeScript
-├── utils/ # Cliente Prisma, helpers
-└── tests/ # Tests de integración
-
+├── routes/        # Definición de endpoints
+├── controllers/   # Manejo de request/response
+├── services/      # Lógica de negocio
+├── repositories/  # Acceso a datos (Prisma)
+├── middlewares/   # Auth, roles
+├── types/         # Interfaces TypeScript
+├── utils/         # Cliente Prisma, helpers
+└── tests/         # Tests de integración
+```
 La base de datos PostgreSQL es consumida también por **libreria-trinidad-analytics** para modelos dbt de reportes de ventas y análisis por ciudad.
 
 ## Endpoints
