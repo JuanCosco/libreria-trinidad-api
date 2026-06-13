@@ -7,7 +7,7 @@ REST API para una tienda online de libros, migrada desde PHP legacy a una arquit
 Este repositorio es parte del proyecto **Librería Trinidad**, una migración completa de una tienda de libros legacy a arquitectura moderna.
 
 | Repositorio                                                                             |  Descripción                               |
-| --------------------------------------------------------------------------------  ----- | ------------------------------------------ |
+| --------------------------------------------------------------------------------------- | ------------------------------------------ |
 | **libreria-trinidad-api** ← estás aquí                                                  | REST API con Express + Prisma + PostgreSQL |
 | [libreria-trinidad-web](https://github.com/JuanCosco/libreria-trinidad-web)             | Frontend Next.js 16 + Tailwind + shadcn    |
 | [libreria-trinidad-analytics](https://github.com/JuanCosco/libreria-trinidad-analytics) | Capa analytics con dbt sobre la misma DB   |
